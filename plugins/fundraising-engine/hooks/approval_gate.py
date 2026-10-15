@@ -2,13 +2,13 @@
 """Approval gate: nothing that spends credits or sends email runs without the operator's
 explicit approval in her MOST RECENT message.
 
-Why a hook and not just an instruction (Krystof, 14-15 Oct 2026): the skills already say
+Why a hook and not just an instruction (the Metanoia consultant, 14-15 Oct 2026): the skills already say
 "always ask before spending", but instructions are text in context and an agent under load
 skips them — in October 2026 an operator's ChatGPT sent emails from Gmail and set itself a
 sending scheduled task despite being told not to. Codex / ChatGPT Work run PreToolUse hooks on the
 desktop, and a hook's "deny" is enforced by the runtime, not by the model's good intentions.
 
-How it works (mirrors the spend guard Krystof uses in Claude Code):
+How it works (mirrors the spend guard the Metanoia consultant uses in Claude Code):
 - UserPromptSubmit: if the prompt contains "approve spend" or "approve send", record that
   approval with the turn id; ANY other prompt clears it, so approval never outlives the
   message it was given in.
@@ -47,7 +47,7 @@ SEND = [
     re.compile(r"ntn\s+workers\s+exec\s+(pushToSmartLead|draftNow|appendLeads|syncSequence)\b"),
 ]
 # Never from the operator's machine, approval or not: deploying, deleting or re-configuring the
-# workers is Krystof's build work (a wrong deploy silently stops sending for everyone).
+# workers is the Metanoia consultant's build work (a wrong deploy silently stops sending for everyone).
 NEVER = [re.compile(r"ntn\s+workers\s+(deploy|delete|env|create|new|rename)\b")]
 
 
@@ -80,7 +80,7 @@ def main():
         print(json.dumps({"hookSpecificOutput": {"hookEventName": "PreToolUse",
               "permissionDecision": "deny",
               "permissionDecisionReason": "Changing the workers (deploy, delete, env, create) is "
-              "build work for Krystof, never done from here. Use report-a-problem instead."}}))
+              "build work for the Metanoia consultant, never done from here. Use report-a-problem instead."}}))
         return
     need = None
     if any(r.search(cmd) for r in SEND):
@@ -118,4 +118,4 @@ if __name__ == "__main__":
         if '"PreToolUse"' in raw:
             print(json.dumps({"hookSpecificOutput": {"hookEventName": "PreToolUse",
                   "permissionDecision": "deny",
-                  "permissionDecisionReason": f"Approval gate error ({e}); tell Krystof."}}))
+                  "permissionDecisionReason": f"Approval gate error ({e}); tell the Metanoia consultant."}}))

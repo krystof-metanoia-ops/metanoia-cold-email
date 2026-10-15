@@ -15,7 +15,7 @@ Ask for, or read from the client's Notion context page:
 - the context page title;
 - the **primary domain** (her real mailbox's domain);
 - the **cold sending domains**;
-- the Notion data source IDs for Contacts, Interactions, Campaigns and Templates. They're on the context page, or Krystof has them.
+- the Notion data source IDs for Contacts, Interactions, Campaigns and Templates. They're on the context page, or the Metanoia consultant has them.
 
 Write them to `~/.fundraising-engine/<slug>.json`:
 
@@ -67,7 +67,7 @@ The dry runs (what drafting or a Push WOULD do) are Notion Worker tools. Notion'
 
 1. Install it in Terminal: `curl -fsSL https://ntn.dev | bash`, then check with `ntn --version`.
 2. Run `ntn login`. A browser window opens: she signs in with her own Notion account and picks the client's workspace.
-3. Add to the client config the workspace id (`notion_workspace_id`) and the two worker ids (`"workers": {"email-drafter": "...", "smartlead-feeder": "..."}`). Krystof has them.
+3. Add to the client config the workspace id (`notion_workspace_id`) and the two worker ids (`"workers": {"email-drafter": "...", "smartlead-feeder": "..."}`). The Metanoia consultant has them.
 4. Test on any wave: `python3 fundraising-system/scripts/workers.py preview-feed --client <slug> <wave page id>`. It must answer with what it would push, or why not.
 
 The approval gate allows only the dry runs and pausing. Pushing, drafting and appending need "approve send", and deploying or changing workers is blocked outright.

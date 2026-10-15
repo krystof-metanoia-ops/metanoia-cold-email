@@ -50,7 +50,7 @@ Before shortlisting, check the search results against Notion (firms by normalise
 
 ## 6a. Credits: what's available, and a ceiling
 
-Krystof (15 Oct 2026): before any spending, tell her how many credits she has and offer a ceiling, then work until the ceiling and stop.
+The Metanoia consultant (15 Oct 2026): before any spending, tell her how many credits she has and offer a ceiling, then work until the ceiling and stop.
 
 1. **Read the balance.**
    - If the `clay` command-line tool is installed and logged in on her Mac, `clay credits balance` gives two numbers: data credits (lookups) and actions (workflow runs). Either at 0 blocks enrichment.

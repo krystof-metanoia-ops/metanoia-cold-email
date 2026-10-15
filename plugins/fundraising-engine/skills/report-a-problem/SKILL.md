@@ -1,6 +1,6 @@
 ---
 name: report-a-problem
-description: Use when something in the fundraising system looks wrong and the operator asks "this looks off", "why did that happen", "it didn't send", "wrong status", "duplicate email", or when you notice a fault yourself. Collects the evidence and writes a short report for Krystof (who built the system) that the operator can forward. Reports only; never repairs, never guesses causes, never changes the rows involved. Not for routine questions about how the system works.
+description: Use when something in the fundraising system looks wrong and the operator asks "this looks off", "why did that happen", "it didn't send", "wrong status", "duplicate email", or when you notice a fault yourself. Collects the evidence and writes a short report for the Metanoia consultant (who built the system) that the operator can forward. Reports only; never repairs, never guesses causes, never changes the rows involved. Not for routine questions about how the system works.
 ---
 
 # Report a problem
@@ -10,7 +10,7 @@ The rule from `fundraising-system` section 8 and 10: report, do not repair. Ever
 ## 1. Stop
 
 1. Make no further writes to the rows involved. Do not create a replacement row, flip a status, retry a send, press a button or clear anything.
-2. If the problem is that something may be about to send to the wrong person, tell the operator now, in one sentence, and say what she can do herself (for example set the row back to Drafted, or ask Krystof to pause the wave). Do not do it for her.
+2. If the problem is that something may be about to send to the wrong person, tell the operator now, in one sentence, and say what she can do herself (for example set the row back to Drafted, or ask the Metanoia consultant to pause the wave). Do not do it for her.
 
 ## 2. Collect the evidence (read-only)
 
@@ -41,9 +41,9 @@ Keep it short enough to read on a phone. Use this shape:
 > **Seen:** ... (quoted values and dates)
 > **Not changed:** I have not edited, created or deleted anything about this.
 > **Unknown:** what I could not tell from the rows.
-> **Needs:** what you need from Krystof, and whether anything may send in the meantime.
+> **Needs:** what you need from the Metanoia consultant, and whether anything may send in the meantime.
 
-Show it in the chat. Say: "You can forward this to Krystof as it is." Krystof Ekl (Metanoia Ops) built the system and maintains it. Send it by the route the context page names for faults; if none is named, the operator forwards it herself. Do not look for his address elsewhere.
+Show it in the chat. Say: "You can forward this to the Metanoia consultant as it is." The Metanoia consultant (Metanoia Ops) built the system and maintains it. Send it by the route the context page names for faults; if none is named, the operator forwards it herself. Do not look for his address elsewhere.
 
 ## 5. Record it in Notion (only if there is a place)
 
@@ -51,6 +51,6 @@ If the context page names a place for problem reports (a page, a database or a c
 
 ## 6. After the report
 
-- Say what happens next: Krystof reads it, and nothing in the system has changed until he acts.
+- Say what happens next: the Metanoia consultant reads it, and nothing in the system has changed until he acts.
 - Offer to re-check the rows later (read-only) and report what changed.
 - Anything that touches sending, suppression, Email Status, Pipeline Stage past Engaged, or deleting rows needs her explicit yes, even if she asks you to "just fix it". Tell her you are not able to repair it in this skill, and why.

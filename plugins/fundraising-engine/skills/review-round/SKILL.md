@@ -26,7 +26,7 @@ Review properties and their exact names differ by client. Before anything else, 
 | Latest review comment | text | One line, rewritten each round, so the whole list reads at a glance. |
 | Last reviewed | date | The date a human last gave a verdict. Empty means never reviewed. |
 
-If any of the four is missing, or you are unsure which property is which, ask the operator one question before writing anything. Do not create properties. Schema changes belong to Krystof (see `report-a-problem`).
+If any of the four is missing, or you are unsure which property is which, ask the operator one question before writing anything. Do not create properties. Schema changes belong to the Metanoia consultant (see `report-a-problem`).
 
 **A tier is not a verdict.** Many firms carry a tier that was derived from where the row came from, and nobody looked at it. An empty Last reviewed means no human has judged the row. Never tell her a firm "was graded A" on the strength of a tier on an unreviewed row. Say "the sourcing pass put it at A because <evidence>".
 

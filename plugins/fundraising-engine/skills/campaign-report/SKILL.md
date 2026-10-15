@@ -17,7 +17,7 @@ Read `fundraising-system` first. Read the client's context page; it says where t
    - **Policy refusal** ("rejected due to security policies", "envelope blocked", "sender address blocked", a named blocklist): the mail gateway refused our domain. The address is almost certainly fine. Report it as a refusal, never as a bad address.
    - **Real bounce** ("user unknown", "no such recipient"): a dead address.
    - Unsure: say "unclear" and leave it.
-   Never set Email Status or a Suppression because of a bounce. Refusals at large firms point to the gateway problem on the context page; flag them for Krystof through `report-a-problem`.
+   Never set Email Status or a Suppression because of a bounce. Refusals at large firms point to the gateway problem on the context page; flag them for the Metanoia consultant through `report-a-problem`.
 4. **Drafts waiting.** Interactions with Sending Status = Drafted and Direction = Out. Also rows at Send failed, and rows at Approved with an empty Date & Time (these never send).
 5. **Threads needing her.** The Unread view, and inbound human replies with no outbound after them and no "No reply needed" stance. Skip Auto-reply, Bounce, Unsubscribe and Other. Read each reply's Reply Sentiment if present.
 6. **Follow-ups due.** Contacts whose Next Touch is today or earlier, and in-conversation threads where the last message is ours and older than 5 days.

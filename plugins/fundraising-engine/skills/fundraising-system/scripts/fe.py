@@ -3,11 +3,11 @@
 Design notes (Metanoia Ops, 2026-10-15):
 - One operator can serve several clients (e.g. one person runs two clients' raises), so every
   config file and every Keychain item is namespaced by a short client slug.
-- Keys live ONLY in the macOS Keychain (Krystof's call, 15 Oct), service name
+- Keys live ONLY in the macOS Keychain (the Metanoia consultant's call, 15 Oct), service name
   "fundraising-engine.<client>.<tool>". Nothing here prints a key; callers must not either.
 - HTTP goes through the system `curl`, not urllib: the python.org builds on macOS ship
   without CA certificates, so urllib fails with CERTIFICATE_VERIFY_FAILED on a fresh Mac
-  (seen on Krystof's machine). curl uses the system trust store.
+  (seen on a fresh Mac). curl uses the system trust store.
 - Client config lives in ~/.fundraising-engine/<client>.json, written by the setup skill.
   It holds IDs and domains only — never secrets.
 """

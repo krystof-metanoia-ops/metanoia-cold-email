@@ -94,7 +94,7 @@ Her words, not your interpretation.
 - Log an email that was already sent. Sent mail logs itself within 15 minutes; if it doesn't appear, report it.
 - Set a template Active, a wave to Sending, press Push to SmartLead or Draft Due Emails. Tell her what pressing it will do.
 - Create a scheduled task that sends or approves. Scheduled tasks may read, report and **draft**.
-- Change the Notion schema, formulas or worker settings. That's Krystof's build work.
+- Change the Notion schema, formulas or worker settings. That's the Metanoia consultant's build work.
 - Delete in bulk. List the rows; she confirms each one.
 
 ## 9. Health

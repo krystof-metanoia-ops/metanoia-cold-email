@@ -1,6 +1,6 @@
 # Installing the Fundraising Engine skills (for the operator's Mac)
 
-About 30 minutes, done together with Krystof the first time. You don't need a GitHub account or any download, and you don't type commands yourself: open ChatGPT on your Mac in Work mode with **Mac access**, paste each step, and let it do the work. It asks before anything changes.
+About 30 minutes, done together with the Metanoia consultant the first time. You don't need a GitHub account or any download, and you don't type commands yourself: open ChatGPT on your Mac in Work mode with **Mac access**, paste each step, and let it do the work. It asks before anything changes.
 
 ## You'll need
 
@@ -12,11 +12,11 @@ About 30 minutes, done together with Krystof the first time. You don't need a Gi
 1. **Add the skills.** Paste into ChatGPT:
    > Make sure the Codex command-line tool is installed on my Mac (install it if not). Then run `codex plugin marketplace add krystof-metanoia-ops/metanoia-cold-email` and confirm with `codex plugin marketplace list` that the "metanoia-ops" marketplace is there. Then tell me to restart the ChatGPT app.
 
-   *If that fails,* Krystof can send a zip instead: unzip it into `~/metanoia-cold-email` and list it in `~/.agents/plugins/marketplace.json` as a local plugin, path `./metanoia-cold-email/plugins/fundraising-engine`.
+   *If that fails,* the Metanoia consultant can send a zip instead: unzip it into `~/metanoia-cold-email` and list it in `~/.agents/plugins/marketplace.json` as a local plugin, path `./metanoia-cold-email/plugins/fundraising-engine`.
 
 2. **Install the plugin.** Restart ChatGPT, open the **Plugins Directory**, choose the source **Metanoia Ops**, and install **fundraising-engine**.
 
-3. **Trust the approval gate.** ChatGPT shows that the plugin has hooks to review. Read with Krystof what `approval_gate.py` does: it blocks anything that spends credits or sends email until you write "approve spend" or "approve send". Then trust it.
+3. **Trust the approval gate.** ChatGPT shows that the plugin has hooks to review. Read with the Metanoia consultant what `approval_gate.py` does: it blocks anything that spends credits or sends email until you write "approve spend" or "approve send". Then trust it.
 
 4. **Set permissions to "Ask for approval".** In Work mode's permission menu choose **Ask for approval** ("Always ask to edit external files and use the internet"), not "Approve for me".
 
@@ -35,4 +35,4 @@ Updates come from the same place: say `update the fundraising engine skills`, an
 
 ## If something looks wrong
 
-Say `report a problem`. It writes a note you can forward to Krystof, and changes nothing.
+Say `report a problem`. It writes a note you can forward to the Metanoia consultant, and changes nothing.

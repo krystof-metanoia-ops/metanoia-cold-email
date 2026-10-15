@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build the download for operators without GitHub access (Krystof, 15 Oct 2026: "set this up
+# Build the download for operators without GitHub access (the Metanoia consultant, 15 Oct 2026: "set this up
 # so that she doesn't need to create a GitHub account").
 # Output: dist/metanoia-cold-email-<version>.zip, unzipped by the operator into
 # ~/metanoia-cold-email (see INSTALL.md). Refuses to package if a client name slipped in:

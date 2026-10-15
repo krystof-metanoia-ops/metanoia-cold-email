@@ -2,7 +2,7 @@
 # Store one client's API keys in the macOS Keychain for the fundraising-engine skills.
 # Usage: bash setup_keys.sh <client-slug>      e.g. bash setup_keys.sh acme
 #
-# Why this shape (Krystof, 15 Oct 2026: keys in the macOS Keychain, no new subscription):
+# Why this shape (the Metanoia consultant, 15 Oct 2026: keys in the macOS Keychain, no new subscription):
 # - The operator copies each key from the tool's own dashboard and pastes it at a hidden
 #   prompt (read -s): it never appears on screen, in shell history, or in a chat.
 # - Items are created with an EMPTY trusted-app list (-T ""), so macOS asks her to allow

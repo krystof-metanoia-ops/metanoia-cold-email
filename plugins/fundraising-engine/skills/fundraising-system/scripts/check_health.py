@@ -12,7 +12,7 @@ Reports:
    SmartLead warns at ~5-6% bounces per mailbox; treat 3%+ as worth a look.
    NOTE: per-mailbox bounce rates are not in the mailbox object; this script reports what
    the analytics endpoints return and says so when a field is missing (untested against a
-   live plan as of 15 Oct 2026 because the plan had lapsed — Krystof to confirm on renewal).
+   live plan as of 15 Oct 2026 because the plan had lapsed — the Metanoia consultant to confirm on renewal).
 4. Per sending domain: SURBL, Spamhaus DBL and URIBL listings via plain DNS, plus SPF/DMARC.
    A listing on SURBL (127.0.0.64 = abuse list) is why Mimecast-protected firms refuse mail.
    Resolver sanity entries are checked first; if a list refuses public resolvers the result

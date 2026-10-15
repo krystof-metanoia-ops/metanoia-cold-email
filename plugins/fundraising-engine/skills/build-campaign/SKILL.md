@@ -46,7 +46,7 @@ Work from the approved list. For each contact, apply `fundraising-system` sectio
    - A returning contact whose Outreach Channel does not match the lane: do not change it. List the contact for her.
 3. **Warm lane:** nothing beyond the blockers and opt-outs.
 4. **One contact per firm per wave.** If a firm has several approved contacts, keep the one she ranked highest, or ask.
-5. **Sender continuity (cold):** for each returning contact, read the sender of the earlier messages from their Interactions. Group the roster by last sending mailbox. Contacts who replied before matter most. Build one wave per group, and name the group in the wave page. If the context page does not say how a wave is tied to a mailbox, ask her to pass this to Krystof through `report-a-problem`; do not guess.
+5. **Sender continuity (cold):** for each returning contact, read the sender of the earlier messages from their Interactions. Group the roster by last sending mailbox. Contacts who replied before matter most. Build one wave per group, and name the group in the wave page. If the context page does not say how a wave is tied to a mailbox, ask her to pass this to the Metanoia consultant through `report-a-problem`; do not guess.
 6. Add contacts by the contact's **Campaigns** relation (the roster). Add the first 5, check them, then add the rest.
 7. Make a list of everyone you held back, with the one-line reason each. She sees it in the report.
 

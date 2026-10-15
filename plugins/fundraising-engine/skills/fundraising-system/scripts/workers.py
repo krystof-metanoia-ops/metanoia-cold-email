@@ -5,9 +5,9 @@ Usage:
   python3 workers.py preview-drafts --client <slug> <wave_page_id>   # warm lane: what drafting would do
   python3 workers.py preview-feed   --client <slug> <wave_page_id>   # cold lane: what a Push would send
 
-Why this exists (Krystof, 15 Oct 2026: "Why couldn't her ChatGPT call preview draft and preview
+Why this exists (the Metanoia consultant, 15 Oct 2026: "Why couldn't her ChatGPT call preview draft and preview
 feed?"): the dry runs are Notion Worker tools. Until now only the client's Notion agent or
-Krystof's `ntn workers exec` could call them. With Notion's CLI (`ntn`) installed on her Mac and
+the Metanoia consultant's `ntn workers exec` could call them. With Notion's CLI (`ntn`) installed on her Mac and
 logged in with her own Notion account, her ChatGPT can run them directly and read the answer,
 instead of asking her to relay it from the Notion agent.
 
