@@ -1,0 +1,11 @@
+{
+  "description": "Approval gate: spending credits or sending email needs 'approve spend' / 'approve send' in the operator's latest message.",
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "python3 \"${PLUGIN_ROOT}/hooks/approval_gate.py\"", "timeout": 5 } ] }
+    ],
+    "PreToolUse": [
+      { "matcher": "Bash", "hooks": [ { "type": "command", "command": "python3 \"${PLUGIN_ROOT}/hooks/approval_gate.py\"", "statusMessage": "Checking for spend/send approval", "timeout": 5 } ] }
+    ]
+  }
+}

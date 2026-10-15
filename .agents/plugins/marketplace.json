@@ -1,0 +1,7 @@
+{
+  "name": "metanoia-ops",
+  "interface": { "displayName": "Metanoia Ops" },
+  "plugins": [
+    { "name": "fundraising-engine", "source": { "source": "local", "path": "./plugins/fundraising-engine" } }
+  ]
+}
