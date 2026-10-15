@@ -1,10 +1,11 @@
 # Installing the Fundraising Engine skills (for the operator's Mac)
 
-About 30 minutes, done together with the Metanoia consultant the first time. You don't need a GitHub account or any download, and you don't type commands yourself: open ChatGPT on your Mac in Work mode with **Mac access**, paste each step, and let it do the work. It asks before anything changes.
+About 30 minutes, done together with the Metanoia consultant the first time. You don't download anything, and you don't type commands yourself: open ChatGPT on your Mac in Work mode with **Mac access**, paste each step, and let it do the work. It asks before anything changes.
 
 ## You'll need
 
 - A Mac with the ChatGPT desktop app, signed in to your workspace.
+- A GitHub account, for sending feedback on the skills. Setup helps you create one if needed.
 - Your logins for SmartLead, MillionVerifier, BounceBan and Notion. ChatGPT walks you through finding each API key.
 
 ## Steps
@@ -32,6 +33,10 @@ About 30 minutes, done together with the Metanoia consultant the first time. You
 ## Updating
 
 Updates come from the same place: say `update the fundraising engine skills`, and ChatGPT runs `codex plugin marketplace upgrade`. The morning brief does this once a week by itself. If the approval gate changed, ChatGPT asks you to review it again. That's expected.
+
+## Feedback
+
+If a skill gets something wrong, is confusing, or should do more, say `send feedback`. ChatGPT asks three short questions (or drafts the answers from your chat), removes anything that identifies you, your investors or the client, shows you the result, and posts it after you reply "approve post". It goes to the public issues page of this repository, where you can also upvote what other users asked for.
 
 ## If something looks wrong
 

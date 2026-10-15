@@ -6,6 +6,8 @@ Skills that let a client's ChatGPT (chat, ChatGPT Work, Codex app) operate the N
 - **Two surfaces.** ChatGPT chat handles conversation, drafting, Notion and the morning brief. The Codex app, on the operator's Mac, handles anything that calls an API with a key (SmartLead, MillionVerifier, BounceBan). Keys live in the macOS Keychain, never in this repo.
 - **Always ask before spending or sending.** Every credit-consuming action states what it will do and the rough credit cost, and waits for an explicit yes.
 
-Status: v0.2 (2026-10-15), untested with a live operator. 10 skills, the approval-gate hook, scripts (health check, verification ladder, mail-gateway check, worker dry runs, key setup). Install: see INSTALL.md.
+**Feedback:** operators' agents file anonymised issues here (label `feedback`) via the `send-feedback` skill. Upvote with 👍.
+
+Status: v0.3 (2026-10-15), untested with a live operator. 10 skills, the approval-gate hook, scripts (health check, verification ladder, mail-gateway check, worker dry runs, key setup). Install: see INSTALL.md.
 
 Built and maintained by [Metanoia Ops](https://metanoia-ops.com). No licence is granted: all rights reserved.

@@ -42,6 +42,7 @@ A campaign the operator wants to run **by hand, one email at a time**, must not 
 | 6 | `draft-replies` | Replies came in, or follow-ups are due. Drafts only; she approves in the chat. |
 | 7 | `contact-hygiene` | Weekly, or when duplicates and new auto-created contacts pile up. |
 | any | `report-a-problem` | Something looks wrong. Report it; don't repair it. |
+| any | `send-feedback` | A skill got something wrong or was confusing, or she wants something new. Anonymised, then posted publicly for the Metanoia consultant. Offer it once when she's clearly dissatisfied, and the weekly summary asks. |
 | once | `setup` | First install on a new Mac or for a new client: keys, config, settings. |
 
 ## 4. Where things run
@@ -107,6 +108,10 @@ Her words, not your interpretation.
 - each sending domain on the SURBL, Spamhaus and URIBL blocklists.
 
 The morning brief includes it.
+
+## 9b. When she's unhappy with how a skill worked
+
+Fix the task first. Then offer `send-feedback` once, in one line. Don't offer it again for the same issue. A problem with her own data or a risky send goes to `report-a-problem` instead; that stays private.
 
 ## 10. When unsure
 

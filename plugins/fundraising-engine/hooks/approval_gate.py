@@ -46,6 +46,11 @@ SEND = [
     # for the two dry runs only). previewDrafts / previewFeed / pauseCampaign pass freely.
     re.compile(r"ntn\s+workers\s+exec\s+(pushToSmartLead|draftNow|appendLeads|syncSequence)\b"),
 ]
+# Publishing to the public feedback repo (15 Oct 2026): issues, comments and reactions are
+# world-readable, so posting is gated like sending — the operator reads the anonymised text first.
+POST = [re.compile(r"gh\s+issue\s+(create|comment|edit)\b"),
+        re.compile(r"gh\s+api\b.*-X\s*(POST|PATCH|PUT|DELETE)", re.I),
+        re.compile(r"gh\s+api\b.*/(issues|comments|reactions)\b.*-(f|F)\s")]
 # Never from the operator's machine, approval or not: deploying, deleting or re-configuring the
 # workers is the Metanoia consultant's build work (a wrong deploy silently stops sending for everyone).
 NEVER = [re.compile(r"ntn\s+workers\s+(deploy|delete|env|create|new|rename)\b")]
@@ -69,7 +74,7 @@ def main():
 
     if name == "UserPromptSubmit":
         p = (ev.get("prompt") or "").lower()
-        kinds = [k for k in ("spend", "send") if f"approve {k}" in p]
+        kinds = [k for k in ("spend", "send", "post") if f"approve {k}" in p]
         save({"turn_id": ev.get("turn_id"), "kinds": kinds, "at": time.time()})
         return  # exit 0, no output: the prompt goes through unchanged
 
@@ -83,7 +88,9 @@ def main():
               "build work for the Metanoia consultant, never done from here. Use report-a-problem instead."}}))
         return
     need = None
-    if any(r.search(cmd) for r in SEND):
+    if any(r.search(cmd) for r in POST):
+        need = "post"
+    elif any(r.search(cmd) for r in SEND):
         need = "send"
     elif any(r.search(cmd) for r in SPEND):
         need = "spend"
@@ -94,7 +101,8 @@ def main():
     ok = need in st.get("kinds", []) and st.get("turn_id") == ev.get("turn_id")
     if ok:
         return
-    what = "spends credits" if need == "spend" else "sends email or arms a campaign"
+    what = {"spend": "spends credits", "send": "sends email or arms a campaign",
+            "post": "publishes to the public feedback repository"}[need]
     print(json.dumps({"hookSpecificOutput": {
         "hookEventName": "PreToolUse",
         "permissionDecision": "deny",

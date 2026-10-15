@@ -72,6 +72,14 @@ The dry runs (what drafting or a Push WOULD do) are Notion Worker tools. Notion'
 
 The approval gate allows only the dry runs and pausing. Pushing, drafting and appending need "approve send", and deploying or changing workers is blocked outright.
 
+## 2c. GitHub, for sending feedback
+
+Feedback goes to the plugin's public GitHub issues (`send-feedback`).
+1. If she has no GitHub account, she creates one at github.com/signup. Free; walk her through it.
+2. Install the GitHub command-line tool. With Homebrew: `brew install gh`. Without it, download the macOS installer from cli.github.com.
+3. Run `gh auth login`, then choose GitHub.com, HTTPS, and log in with a web browser. She confirms the code in the browser.
+4. Check with `gh auth status`.
+
 ## 3. Settings in ChatGPT (with her, about 10 minutes)
 
 - **Permissions for Work / Codex: "Ask for approval"** ("Always ask to edit external files and use the internet"). Not "Approve for me".

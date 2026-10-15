@@ -103,7 +103,7 @@ Next Touch has arrived and in-conversation threads where we wrote last and have 
 ```
 Use $campaign-report for <client>. Write a weekly summary: for each campaign this week's sent, opens, replies
 and bounces (policy refusals and real bounces separately), meetings booked, the tiers or lists not yet
-contacted, and what to source next. Include the HEALTH section. Report only. Do not draft, approve or send.
+contacted, and what to source next. Include the HEALTH section. End with: "Was anything about the skills frustrating or confusing this week? Say 'send feedback' and I'll write it up for the Metanoia consultant." Report only. Do not draft, approve, send or post.
 ```
 
 If she wants a campaign and mailbox health check on its own schedule, it is the HEALTH section of the first task; do not add a fifth task.
