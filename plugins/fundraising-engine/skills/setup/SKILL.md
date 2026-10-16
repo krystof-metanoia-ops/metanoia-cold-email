@@ -103,6 +103,10 @@ A plugin can't install scheduled tasks, but you can create them from this chat. 
 
 They run in OpenAI's cloud, not on her Mac, so they can't use the Keychain. The morning brief covers Notion but skips the SmartLead and blocklist health, and reminds her to say `run the health check` on her Mac.
 
+## 3c. Automatic skill updates: offer to switch them on
+
+Offer: "Shall I switch on automatic updates, so new versions of these skills arrive by themselves every morning?" On her yes, run `bash <full path>/setup/scripts/install_autoupdate.sh` (from your terminal is fine; it needs no input). It installs a small macOS job that runs `codex plugin marketplace upgrade` daily at 07:00 and at login, and logs to `~/.fundraising-engine/update.log`. To turn it off: the same script with `--remove`.
+
 ## 4. Check it works (free)
 
 1. `python3 fundraising-system/scripts/check_health.py --client <slug>`. Expect the SmartLead plan status, the mailboxes and the domain blocklist results.

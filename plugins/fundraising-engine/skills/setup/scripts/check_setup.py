@@ -78,6 +78,9 @@ def main():
     step("4. GitHub CLI logged in (for feedback only)", bool(r and r.returncode == 0),
          "brew install gh (or cli.github.com), then gh auth login")
 
+    plist = os.path.expanduser("~/Library/LaunchAgents/com.metanoia-ops.fundraising-engine.update.plist")
+    step("6. Automatic skill updates", os.path.exists(plist),
+         "Offer to run setup/scripts/install_autoupdate.sh (setup §3c)")
     # Scheduled tasks live in her ChatGPT account, which this script can't see. The setup
     # skill offers to create them itself (16 Oct 2026: "why can't the plugin at least offer
     # to install those"), so the checklist just reminds the agent to do it.
