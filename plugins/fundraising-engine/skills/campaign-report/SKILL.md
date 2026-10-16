@@ -79,6 +79,8 @@ An approval counts only in her latest message. A scheduled run never approves. D
 
 ## 4. Ready-to-paste scheduled tasks
 
+*Scheduled tasks run in OpenAI's cloud, without access to her Mac's Keychain. Inside a task, skip the HEALTH script and write one line instead: "Health check skipped (runs on your Mac): say 'run the health check'." The same goes for the Monday skill update, which needs her Mac: remind her instead.*
+
 Create these in ChatGPT's Scheduled tasks. Replace `<client>` and `<time zone>`. Each task runs under the same rule: read and report, may draft, never approve or send, never touch a template, wave, Push or Suppression.
 
 **Morning brief, daily at 6:00 operator time** (the campaign and mailbox health check is part of this task)
@@ -90,7 +92,7 @@ anything to Approved. Do not send, approve, activate, push, or change any campai
 terminal is unavailable, say so in the report. End with: "Reply here to approve, edit or reject the drafts."
 ```
 
-On Mondays the morning brief also starts with `codex plugin marketplace upgrade`, which brings in skill updates, and says in one line whether anything changed.
+On Mondays the morning brief reminds her to say `update the fundraising engine skills`. The update runs on her Mac, which a scheduled task can't reach.
 
 **Follow-ups due, Monday and Thursday at 6:30 operator time**
 ```

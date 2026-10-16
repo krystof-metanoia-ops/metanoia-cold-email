@@ -92,6 +92,12 @@ Feedback goes to the plugin's public GitHub issues (`send-feedback`).
 - **Credits:** set a monthly limit for her seat.
 - **Scheduled tasks:** look through her list together and delete anything that sends or approves. Then create the ones in `campaign-report`.
 
+## 3b. Scheduled tasks (she creates them; a plugin can't)
+
+Have her ask ChatGPT to create the three tasks whose texts are in `campaign-report` §4 (morning brief daily, follow-ups Mon + Thu, weekly summary Fri) in her time zone. Each may read, report and create Drafted replies only.
+
+They run in OpenAI's cloud, not on her Mac, so they can't use the Keychain: the morning brief covers Notion but skips the SmartLead and blocklist health and says so. She runs `run the health check` on her Mac for that.
+
 ## 4. Check it works (free)
 
 1. `python3 fundraising-system/scripts/check_health.py --client <slug>`. Expect the SmartLead plan status, the mailboxes and the domain blocklist results.

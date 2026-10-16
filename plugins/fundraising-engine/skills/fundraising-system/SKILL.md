@@ -96,6 +96,7 @@ Her words, not your interpretation.
 - Set a template Active, a wave to Sending, press Push to SmartLead or Draft Due Emails. Tell her what pressing it will do.
 - Create a scheduled task that sends or approves. Scheduled tasks may read, report and **draft**.
 - Change the Notion schema, formulas or worker settings. That's the Metanoia consultant's build work.
+- **Run any `ntn workers` command other than these three:** `ntn workers list`, `ntn workers exec previewDrafts …` and `ntn workers exec previewFeed …` (through `fundraising-system/scripts/workers.py`). The operator may have Full access to the workers, but you never deploy, delete, rename, create, change env/secrets, pull env, or exec anything else (pushToSmartLead, draftNow, appendLeads, syncSequence, pauseCampaign). One wrong command can silently stop all sending. If something there looks needed, use `report-a-problem`.
 - Delete in bulk. List the rows; she confirms each one.
 
 ## 9. Health
