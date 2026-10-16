@@ -55,7 +55,7 @@ She has never done this, so go one tool at a time. Give her ONE instruction, wai
    2. Choose the client's workspace and name it "ChatGPT – <her Mac>". Copy the "Internal Integration Secret".
    3. Then, on each of the Contacts, Interactions, Campaigns and Templates databases, use **⋯ → Connections** to add the integration.
 
-**Storing them:** after she has copied a key, have her run `bash setup/scripts/setup_keys.sh <slug>` in Terminal. It asks for each key at a hidden prompt: she pastes and presses Enter, or just Enter to skip one. She can do one tool at a time and re-run it for the next; re-running replaces nothing she skips.
+**Storing them:** after she has copied a key, give her the exact command, with the script's full path in the installed plugin (find it): `bash <full path>/setup/scripts/setup_keys.sh <slug>`. She runs it **in her own Terminal app**, not through your terminal tool: the script asks at hidden, interactive prompts your tool can't answer, and that's what keeps keys out of the chat. It asks for each key at a hidden prompt: she pastes and presses Enter, or just Enter to skip one. She can do one tool at a time and re-run it for the next; re-running replaces nothing she skips.
 
 **Never** ask her to paste a key into the chat, and never print one.
 
