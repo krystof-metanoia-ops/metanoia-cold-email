@@ -56,7 +56,8 @@ One template row per step, linked to the wave through Outreach Campaign(s). **St
 
 - **Page body = the exact email the investor receives.** No notes to the writer, no instructions, no brackets.
 - The only personalisation is `{{first_name}}`. Any other token disappears silently when sent, so never invent one. `{a|b}` spintax is allowed.
-- **Subject Line:** set on step 1. Empty on a follow-up, so it threads as a reply. A set subject starts a new thread.
+- **Subject Line and threads: about 3 emails per thread, then a new thread** (cold-outreach practice). Set a subject on step 1. Leave it empty on steps 2–3 so they thread as replies. Set a NEW subject on step 4 (and on 7, 10, …), which starts a fresh thread. The first email of a new thread must make sense on its own: name the company and the ask, don't rely on "see below". Pick each new subject from that email's angle, e.g. "Introduction to <founder> — <company>".
+- **Sequence length:** 3–5 emails is the norm for investors; long weekly sequences (7+) mostly add spam risk. If she asks for more than 5, say so once in one sentence, then build what she wants, still split into threads of about 3.
 - **Step Number** in order. **Delay (days)** is the wait after that step before the next one. Never 0.
 - **No signature.** The system adds one.
 - Show her each email in the chat. She approves or edits the wording there; apply her edits and add the feedback line (`fundraising-system` section 7).

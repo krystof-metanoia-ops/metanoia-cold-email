@@ -5,6 +5,8 @@ Usage:
   python3 verify.py preview --client <slug> emails.csv     # free: counts + credit estimate, no API calls
   python3 verify.py run     --client <slug> emails.csv     # SPENDS credits (approval gate applies)
   python3 verify.py writeback --client <slug> results.csv  # Notion writes, needs the notion key
+  python3 verify.py preview|run --bb-only ...              # skip MillionVerifier: for contacts it
+                                                           # already marked Catch-all / Unknown
 
 emails.csv needs columns `email` and `page_id` (the Notion contact row); extra columns are kept.
 
@@ -37,6 +39,7 @@ import fe  # noqa: E402
 
 LABEL_MV = {"ok": "Valid", "invalid": "Invalid", "disposable": "Invalid"}
 LABEL_BB = {"deliverable": "Valid", "undeliverable": "Invalid"}
+BB_ONLY = False  # set from --bb-only in __main__
 
 
 def read_rows(path):
@@ -70,7 +73,8 @@ def run(cfg, path):
     out_path = path.rsplit(".", 1)[0] + ".results.csv"
     done = {r["email"] for r in csv.DictReader(open(out_path))} if os.path.exists(out_path) else set()
     todo = [r for r in rows if r["email"] not in done]
-    kmv, kbb = fe.key(cfg["slug"], "millionverifier"), fe.key(cfg["slug"], "bounceban")
+    kmv = None if BB_ONLY else fe.key(cfg["slug"], "millionverifier")
+    kbb = fe.key(cfg["slug"], "bounceban")
     fields = list(rows[0].keys()) + ["mv_result", "bb_result", "email_status"]
     new = not os.path.exists(out_path)
     fh = open(out_path, "a", newline="")
@@ -79,8 +83,11 @@ def run(cfg, path):
         w.writeheader()
 
     def one(r):
-        m = mv(r["email"], kmv)
-        b, label = "", LABEL_MV.get(m)
+        # --bb-only (the Metanoia consultant, 16 Oct 2026): ~490 contacts on the first client carry
+        # Catch-all / Unknown from an earlier MillionVerifier-only pass. Re-running MV would pay
+        # again for an answer we already have, so those go straight to BounceBan.
+        m = "skipped" if BB_ONLY else mv(r["email"], kmv)
+        b, label = "", (None if BB_ONLY else LABEL_MV.get(m))
         if label is None:
             b = bb(r["email"], kbb)
             label = LABEL_BB.get(b, "Unverifiable")
@@ -99,6 +106,10 @@ def run(cfg, path):
 def preview(path):
     rows = read_rows(path)
     n = len(rows)
+    if BB_ONLY:
+        print(f"{n} unique addresses. Estimated credits: BounceBan {n}; MillionVerifier 0 "
+              f"(--bb-only). No API calls were made.")
+        return
     print(f"{n} unique addresses. Estimated credits: MillionVerifier {n}; "
           f"BounceBan about {round(n * 0.35)} (up to {n} if MillionVerifier resolves none). "
           f"No API calls were made.")
@@ -124,7 +135,9 @@ if __name__ == "__main__":
     ap.add_argument("mode", choices=["preview", "run", "writeback"])
     ap.add_argument("csv")
     ap.add_argument("--client")
+    ap.add_argument("--bb-only", action="store_true")
     a = ap.parse_args()
+    BB_ONLY = a.bb_only  # module-level: this block runs at module scope
     if a.mode == "preview":
         preview(a.csv)
     else:

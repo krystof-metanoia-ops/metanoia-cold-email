@@ -28,6 +28,13 @@ Only contacts with `Email Status = Valid` can be emailed. This skill is the only
    - Without one: set Email Status through the Notion app in batches of about 25, from the `email_status` column only. Never type a status from memory.
 8. **Hand off.** Valid contacts can go to `review-round` or `build-campaign`. List the Unverifiable ones for her: they can't be emailed cold, and she decides whether someone knows them personally (warm lane) or they're dropped.
 
+## Settling old Catch-all / Unknown contacts (BounceBan only)
+
+Contacts already marked **Catch-all** or **Unknown** went through MillionVerifier before, but never through BounceBan. Don't pay MillionVerifier again. Select them (email filled, no Suppression), make the same CSV, then run the verification script with `--bb-only`:
+- preview with `--bb-only` first (about 1 BounceBan credit each);
+- after "approve spend", run with `--bb-only --client <slug>`;
+- then write back as usual. The re-verify-after-3-months rule doesn't apply here: these were never settled.
+
 ## How results map (don't change this)
 
 | MillionVerifier | BounceBan | Email Status |
