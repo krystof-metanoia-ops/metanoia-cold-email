@@ -17,6 +17,16 @@ Inputs: the approved contacts (from `review-round`), the client config (`~/.fund
 
 ## 2. Agree the plan, one wave at a time
 
+**First, look at what already exists.** List every wave under this campaign with its status and contact count. If a Drafting or Waiting wave already holds the audience she's asking for, offer to use and extend it rather than building a parallel wave. Parallel drafts split the audience and hide the real numbers from her.
+
+**What counts as "live":** a wave at Sending, or one already pushed to SmartLead. A Drafting or Waiting wave is not live, and its contacts are not "taken"; they can be moved or merged.
+
+**When she asks for volume** ("everyone", "the largest number possible"), give her the real numbers before building:
+- everyone eligible;
+- how many are held back, by reason (no Valid email, opted out, in conversation, Mimecast and similar, already on a live wave);
+- how many sending days it takes at the mailbox capacity (`check_health.py` shows each mailbox's daily limit).
+
+
 Build one wave per conversation. Never several. Write the plan in the chat and wait for her yes before creating anything:
 
 - **Manual or automated?** If she wants to send by hand, one email at a time, this is a manual campaign: no Active steps, no Push, no wave at Sending (see section 8). Otherwise it is an automated wave.
