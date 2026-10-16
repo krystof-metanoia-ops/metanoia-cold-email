@@ -63,6 +63,14 @@ def main():
     step(f"3. Notion CLI logged in{' (workspace: ' + ws + ' — must be the client' + chr(39) + 's)' if ws else ''}",
          bool(ws), "ntn login  (sign in, pick the client's workspace)")
 
+    # Dry runs from the CLI need the workers to be visible to THIS account; the CLI shows a
+    # worker only to whoever deployed it (16 Oct 2026). Not a blocker: the Notion agent runs them.
+    if has_ntn and cfg.get("workers"):
+        lst = run(ntn, "workers", "list")
+        seen = bool(lst and any(w in (lst.stdout or "") for w in cfg["workers"].values()))
+        step("3. Dry runs from this Mac (optional)", seen,
+             "Optional. This account can't see the workers (only their deployer can), so dry runs go "
+             "through the Notion agent instead. Nothing to fix.")
     gh = shutil.which("gh")
     r = run(gh, "auth", "status") if gh else None
     step("4. GitHub CLI logged in (for feedback only)", bool(r and r.returncode == 0),

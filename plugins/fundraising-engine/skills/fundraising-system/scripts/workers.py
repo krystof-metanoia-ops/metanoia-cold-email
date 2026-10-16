@@ -59,6 +59,13 @@ def main():
     # be pushed"), so print it as the result. Only auth problems point at `ntn login`.
     first = out.split("\n    at ")[0]
     print(first if r.returncode == 0 else f"{tool} answered: {first}")
+    if r.returncode != 0 and "workernotfound" in out.lower().replace(" ", ""):
+        # Seen 16 Oct 2026 on the first operator install: logged in to the right workspace, but
+        # `ntn workers list` was empty. The CLI shows a worker only to the account that deployed
+        # it, and has no command to share one. So for an operator this is the normal case.
+        print("This Notion account can't run the workers from the command line (only the account "
+              "that deployed them can). Ask the operator to run the dry run with her Notion agent "
+              f"(\"Run {tool} on this wave\") and paste the answer here.")
     if r.returncode != 0 and any(s in out.lower() for s in ("unauthor", "not logged", "login", "401")):
         print("Looks like the Notion CLI isn't logged in to this workspace: run `ntn login` (see `setup`).")
 
