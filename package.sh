@@ -9,9 +9,15 @@ cd "$(dirname "$0")"
 v=$(python3 -c "import json;print(json.load(open('plugins/fundraising-engine/plugin.json'))['version'])")
 # The client names to refuse live in .denylist (one regex alternative per line), which is
 # gitignored: this repo is public, so the list of who the clients are must never be committed.
+# Lines starting "cs:" are matched case-sensitively: a client named "Portal" must not trip on
+# "Developer portal" (false positive seen 16 Oct 2026).
 if [ -s .denylist ]; then
-  pat=$(grep -v '^#' .denylist | paste -sd'|' -)
-  if grep -rniE "$pat" plugins README.md INSTALL.md; then
+  ci=$(grep -v -e '^#' -e '^cs:' .denylist | paste -sd'|' -)
+  cs=$(grep '^cs:' .denylist | sed 's/^cs://' | paste -sd'|' -)
+  hit=0
+  [ -n "$ci" ] && grep -rniE "$ci" plugins README.md INSTALL.md && hit=1
+  [ -n "$cs" ] && grep -rnE "$cs" plugins README.md INSTALL.md && hit=1
+  if [ "$hit" = 1 ]; then
     echo "Client name found above — remove it before packaging." >&2; exit 1
   fi
 else

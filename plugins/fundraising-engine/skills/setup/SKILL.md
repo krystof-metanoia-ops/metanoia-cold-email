@@ -70,7 +70,7 @@ The dry runs (what drafting or a Push WOULD do) are Notion Worker tools. Notion'
 1. Install it in Terminal: `curl -fsSL https://ntn.dev | bash`, then check with `ntn --version`.
 2. Run `ntn login`. A browser window opens: she signs in with her own Notion account and picks the client's workspace.
 3. Add to the client config the workspace id (`notion_workspace_id`) and the two worker ids (`"workers": {"email-drafter": "...", "smartlead-feeder": "..."}`). The Metanoia consultant has them.
-4. **Expect this to fail for most operators.** The CLI shows a worker only to the account that deployed it, and has no command to share one. If `ntn workers list` is empty, the dry runs go through her Notion agent ("Run previewFeed on this wave"). `build-campaign` already falls back to that. Note it and move on; it isn't a setup error.
+4. **The workers must be shared with her.** Workers are private to whoever deployed them until shared. The Metanoia consultant does it in Notion's Developer portal (notion.so/developers/workers): email-drafter and smartlead-feeder → **Share** → her → **Can connect**. Never "Full access", which allows deploying. If `ntn workers list` is empty, it hasn't been done yet. Until then, the dry runs go through her Notion agent ("Run previewFeed on this wave"), which `build-campaign` already falls back to.
 5. Test on any wave: `python3 fundraising-system/scripts/workers.py preview-feed --client <slug> <wave page id>`. It must answer with what it would push, or why not.
 
 The approval gate allows only the dry runs and pausing. Pushing, drafting and appending need "approve send", and deploying or changing workers is blocked outright.
