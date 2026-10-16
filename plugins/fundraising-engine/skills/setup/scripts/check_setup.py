@@ -78,9 +78,15 @@ def main():
     step("4. GitHub CLI logged in (for feedback only)", bool(r and r.returncode == 0),
          "brew install gh (or cli.github.com), then gh auth login")
 
-    first = next((s for s in STEPS if not s[1] and "optional" not in s[0]), None)
+    # Scheduled tasks live in her ChatGPT account, which this script can't see. The setup
+    # skill offers to create them itself (16 Oct 2026: "why can't the plugin at least offer
+    # to install those"), so the checklist just reminds the agent to do it.
+    STEPS.append(("5. Scheduled tasks (check in ChatGPT's task list)", None,
+                  "Offer to create the 3 tasks from campaign-report §4 (setup §3b)"))
+    first = next((s for s in STEPS if s[1] is False and "optional" not in s[0]), None)
     for name, ok, how in STEPS:
-        print(f"{'DONE   ' if ok else 'MISSING'} {name}" + ("" if ok else f"  ->  {how}"))
+        tag = "CHECK  " if ok is None else ("DONE   " if ok else "MISSING")
+        print(f"{tag} {name}" + ("" if ok else f"  ->  {how}"))
     print("\nNext: " + (first[0] if first else "all set — run the health check (fundraising-system/scripts/check_health.py) and the Keychain-prompt test."))
 
 
