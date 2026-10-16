@@ -1,0 +1,17 @@
+{
+  "client": "<Client name, e.g. Acme Capital>",
+  "context_page": "<Title of the client's Notion context page, e.g. Context: The Emailing Engine>",
+  "primary_domain": "<domain of the operator's real mailbox, e.g. acme.com>",
+  "cold_domains": ["<cold sending domain 1>", "<cold sending domain 2>"],
+  "notion_workspace_id": "<the client's Notion workspace id>",
+  "workers": {
+    "email-drafter": "<worker id of the email drafter>",
+    "smartlead-feeder": "<worker id of the SmartLead feeder>"
+  },
+  "notion": {
+    "contacts_ds": "<Contacts data source id>",
+    "interactions_ds": "<Interactions data source id>",
+    "campaigns_ds": "<Outreach Campaigns data source id>",
+    "templates_ds": "<Templates data source id>"
+  }
+}

@@ -21,14 +21,45 @@ About 30 minutes, done together with the Metanoia consultant the first time. You
 
 4. **Set permissions to "Ask for approval".** In Work mode's permission menu choose **Ask for approval** ("Always ask to edit external files and use the internet"), not "Approve for me".
 
-5. **Run setup.** Say: `@setup set up the fundraising engine for <client>`. It walks you through everything, one step at a time:
-   - finding each API key in SmartLead, MillionVerifier, BounceBan and Notion;
-   - storing the keys. You paste each one at a hidden prompt in Terminal, so it never goes into the chat;
-   - signing in to Notion's command-line tool, for the dry runs.
+5. **Run setup.** Say: `@setup set up the fundraising engine for <client>`. ChatGPT first runs the checklist (`setup/scripts/check_setup.py`), then works through whatever is MISSING, in this order. You can also follow it yourself:
+
+   **5a. Client config.** Copy `setup/client.example.json` (inside the plugin) to `~/.fundraising-engine/<slug>.json`, where `<slug>` is a short lowercase name for the client, e.g. `acme`. Then fill every `<...>`:
+
+   | Field | Where it comes from |
+   |---|---|
+   | `client`, `context_page` | The client's name; the title of their Notion context page |
+   | `primary_domain`, `cold_domains` | Your real mailbox's domain; the separate cold-sending domains |
+   | `notion_workspace_id`, `workers`, `notion` | The context page, or ask the Metanoia consultant. These are IDs, not secrets |
+
+   **5b. API keys.** In each tool, create a **new** key just for this Mac:
+   - **SmartLead:** profile, then Settings, then API keys, then Create API Key. It's shown only once, so copy it immediately.
+   - **MillionVerifier:** profile, then Account settings, then the API KEYS tab, then Add new API key. The direct page is app.millionverifier.com/api.
+   - **BounceBan:** the API section of the dashboard.
+
+   Then, in your own **Terminal** app (not in the chat), run:
+   ```
+   bash <plugin folder>/skills/setup/scripts/setup_keys.sh <slug>
+   ```
+   ChatGPT tells you the exact path. Paste each key when asked; nothing shows on screen. Press Enter to skip a tool.
+
+   **5c. Notion command-line tool** (for the dry runs):
+   ```
+   curl -fsSL https://ntn.dev | bash
+   ntn login
+   ```
+   Sign in and pick the client's workspace.
+
+   **5d. GitHub** (only for sending feedback): create an account at github.com/signup, then:
+   ```
+   brew install gh        # or the installer from cli.github.com
+   gh auth login          # GitHub.com, HTTPS, log in with a web browser
+   ```
 
    macOS asks you to allow access whenever a key is used. Click **Allow**, never "Always Allow".
 
-6. **Check it.** Say: `run the health check`. You'll see your SmartLead plan status, your sending mailboxes and whether any sending domain is on a blocklist.
+6. **Check it.**
+   - Say `run the health check`. You'll see your SmartLead plan status, your sending mailboxes and whether any sending domain is on a blocklist.
+   - Then say `verify <one of your own addresses>`. A macOS "allow access" dialog must appear before anything is spent. If it runs without one, stop and tell the Metanoia consultant.
 
 ## Updating
 

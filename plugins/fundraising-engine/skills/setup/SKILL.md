@@ -7,6 +7,8 @@ description: One-time setup of the fundraising-engine skills on a new Mac or for
 
 Do this together with the operator, one step at a time. Nothing here spends credits or sends email.
 
+**Start every time with the checklist:** `python3 setup/scripts/check_setup.py [--client <slug>]` (use the full path in the installed plugin). It lists each step as DONE or MISSING. Begin at the first MISSING step, skip what's done, and re-run it at the end. The same order is written out in the plugin's INSTALL.md.
+
 ## 1. The client config
 
 Ask for, or read from the client's Notion context page:
@@ -17,7 +19,7 @@ Ask for, or read from the client's Notion context page:
 - the **cold sending domains**;
 - the Notion data source IDs for Contacts, Interactions, Campaigns and Templates. They're on the context page, or the Metanoia consultant has them.
 
-Write them to `~/.fundraising-engine/<slug>.json`:
+Copy the template `setup/client.example.json` to `~/.fundraising-engine/<slug>.json` and replace every `<...>`. The checklist reports a config with any `<...>` left as MISSING. The fields:
 
 ```json
 {
