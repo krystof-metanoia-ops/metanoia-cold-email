@@ -83,7 +83,7 @@ Feedback goes to the plugin's public GitHub issues (`send-feedback`).
 ## 3. Settings in ChatGPT (with her, about 10 minutes)
 
 - **Permissions for Work / Codex: "Ask for approval"** ("Always ask to edit external files and use the internet"). Not "Approve for me".
-- **The approval gate hook:** after installing the plugin, ChatGPT lists its hooks for review. Open the hook review, read `approval_gate.py` together, and trust it. Until it's trusted it doesn't run.
+- **The approval gate hook only runs in local Codex threads.** OpenAI runs ChatGPT Work from its cloud even with Mac access, and there plugin hooks are not supported. In a Codex thread that runs locally, the hook appears for review: read `approval_gate.py` together and trust it. Do paid or sending work in such a thread when possible. Everywhere else the hard check is the Keychain prompt (§2): every key read needs her click on Allow.
 - **Gmail app:** sending set to "Always ask", or off. Email goes out through Notion approvals, not from the chat.
 - **Clay app:** every credit-spending action set to "Always ask".
 - **Credits:** set a monthly limit for her seat.

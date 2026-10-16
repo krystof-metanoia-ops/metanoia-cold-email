@@ -17,7 +17,7 @@ About 30 minutes, done together with the Metanoia consultant the first time. You
 
 2. **Install the plugin.** Restart ChatGPT, open the **Plugins Directory**, choose the source **Metanoia Ops**, and install **fundraising-engine**.
 
-3. **Trust the approval gate.** ChatGPT shows that the plugin has hooks to review. Read with the Metanoia consultant what `approval_gate.py` does: it blocks anything that spends credits or sends email until you write "approve spend" or "approve send". Then trust it.
+3. **The approval gate (local Codex threads only).** In ChatGPT Work the plugin's hook doesn't run, because Work is run from OpenAI's cloud. Your safety check there is the macOS prompt that appears whenever a script uses one of your keys. In a Codex thread running locally on your Mac, ChatGPT shows the hook for review: read with the Metanoia consultant what `approval_gate.py` does (it blocks spending, sending and posting until you write "approve spend", "approve send" or "approve post"), then trust it.
 
 4. **Set permissions to "Ask for approval".** In Work mode's permission menu choose **Ask for approval** ("Always ask to edit external files and use the internet"), not "Approve for me".
 
