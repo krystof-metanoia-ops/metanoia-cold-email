@@ -63,7 +63,7 @@ About 30 minutes, done together with the Metanoia consultant the first time. You
 
 ## Updating
 
-Setup offers to switch on **automatic updates**: a small job on your Mac fetches new versions every morning at 07:00 and at login, so you never need to ask. (`setup/scripts/install_autoupdate.sh`; `--remove` turns it off.) You can still update by hand any time: say `update the fundraising engine skills`. If the approval gate changed, ChatGPT asks you to review it again. That's expected.
+Setup offers to switch on **automatic updates**: a small job on your Mac fetches new versions every morning at 07:00 and at login, so you never need to ask. (`setup/scripts/install_autoupdate.sh`; `--remove` turns it off.) You can still update by hand any time: say `update the fundraising engine skills`. If the approval gate changed, ChatGPT asks you to review it again. That's expected. **Start a new chat after an update.** A chat that is already open may keep the skills it started with.
 
 ## Feedback
 

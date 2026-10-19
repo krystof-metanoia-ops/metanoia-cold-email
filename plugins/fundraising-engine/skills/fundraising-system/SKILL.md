@@ -23,7 +23,8 @@ These writes make real email happen. The full list and its details are on the co
 - Email row `Sending Status = Approved` → **sent within about 20 minutes.** Needs Date & Time filled and Direction = Out.
 - Template `Status = Active` → that copy is approved for a whole wave. **Only the operator flips it, by hand.**
 - Wave `Status = Sending` with contacts on its roster → the drafter writes emails for all of them.
-- **Push to SmartLead** → a live cold campaign starts sending. It is not a test; `previewFeed` is the dry run.
+- **Push to SmartLead** → a live cold campaign starts sending. It is not a test; `previewFeed` is the dry run. Pressed again before the first email has gone out, it re-runs the whole launch; copy edits on a pushed wave go through `syncSequence` (see `build-campaign` §7).
+- **Cold emails carry no attachments.** A file in a template's attachments field reaches only warm-lane emails.
 - **Draft Due Emails** on a parent campaign → drafts for EVERY wave under it, whatever their status.
 - Any **Suppression** value on a contact → blocks all email to them, permanently. Never clear one without the operator's explicit yes in the current chat.
 - **Email Status** is machine-owned evidence. Only the `verify-emails` skill writes it.
