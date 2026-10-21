@@ -51,7 +51,7 @@ Follow the voice guide and the feedback page. Defaults that hold unless the cont
 - Short. Plain words. One clear next step. No hype, no invented numbers, traction or co-investors. If you do not know a fact, ask her or leave it out.
 - No signature block, no name, no title. The sender adds the sign-off. You may end with a closing word only if the voice guide asks for it.
 - Never put internal scoring, notes about the person, or other investors' names in the text.
-- Attachments: the row sends only the files on itself, never the template's. If the reply should carry the deck (check the campaign page for the version), attach it on `Email Attachment`, or tell her to. On a cold-lane reply, warn her to check that the first attachment arrived.
+- Attachments: the row sends only the files on itself, never the template's. If the reply should carry the deck (check the campaign page for the version), attach it on `Email Attachment`, or tell her to. This is how the deck reaches a cold prospect: the first email offers it, and the reply to their "yes" carries it. On a cold-lane reply, warn her to check that the first attachment arrived.
 
 ## 6. Create the row (Drafted)
 

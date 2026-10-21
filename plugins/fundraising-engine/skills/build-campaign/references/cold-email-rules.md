@@ -15,10 +15,28 @@ Distilled from the Metanoia cold-outreach playbook (deliverability, sequencing) 
 
 ## What a cold email can carry
 
-7. **No attachments.** The cold lane (SmartLead) sends none, even if a file sits in the template's attachments field. Never write "I've attached…" in a cold step. Offer the material instead: "I'd be happy to send the one-pager." Attachments on first contact also hurt deliverability.
-8. **No links in the first emails of a thread.** A link to a cold domain or a deck host is the most common spam-filter trigger. If a link is needed, put it in a later reply, and only to the client's real site.
+7. **No attachments on any cold step.** The cold lane (SmartLead) cannot send them: a file in the template's attachments field is never sent, and the system refuses to push a cold step that carries one. Never write "I've attached…".
+8. **No links in step 1. Later, only to the client's own website.** Never a file-sharing or short link (OneDrive, Dropbox, Google Drive, WeTransfer, bit.ly and the like), on any step.
+
 9. **The only personalisation token is `{{first_name}}`.** Any other `{{…}}` renders as nothing. `{a|b}` spintax is fine.
 10. **No signature in the body.** The sending mailbox adds its own.
+
+## Sharing the deck or one-pager
+
+How the material reaches an investor, best first:
+
+- **Offer it, send it on reply (the default).** Step 1 ends with "Would you like the one-pager?" or "Happy to send the one-pager." When they say yes, `draft-replies` puts the file on the reply as a real attachment.
+- **A link in a later step**, if the operator wants one: step 2 or later, to a page on the client's own website where the deck lives. Never step 1.
+- **Never** a file on a cold step, and never a file-share link.
+
+**Explain why when the operator asks to attach or link something.** Don't just refuse. In plain words:
+
+1. **Spam filters judge a stranger's first email by what it carries.** Links and attachments are how phishing and malware arrive, so a first email from an unknown sender that has either is scored as more suspicious. More of them land in spam or promotions, or are held by company mail gateways (Mimecast, Proofpoint), which quarantine files from new senders.
+2. **File-share links look like phishing.** "View the document on OneDrive" from someone you don't know is exactly what credential-phishing emails look like, so gateways treat those links hardest.
+3. **Company link scanners click every link.** Microsoft and others open each link to check it, so click numbers turn into scanner traffic and stop telling you who is interested.
+4. **Cold domains are young.** Their reputation is fragile, and a link ties every email to the reputation of the site it points to.
+5. **Asking works better.** "Would you like the one-pager?" invites a reply. A reply is the strongest good signal to mail providers, and it starts the conversation. A link lets them read it silently and leave, and you never know who looked.
+6. **You keep control of the deck.** You know who received it, and you can send the current version.
 
 ## Who it comes from
 

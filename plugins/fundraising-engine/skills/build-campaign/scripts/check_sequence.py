@@ -49,9 +49,18 @@ STOP_PROMISE = re.compile(r"stop (following up|reaching out|emailing)|won'?t (fo
                           r"(my |this is (my|the) )(last|final) (email|note|message)", re.I)
 
 # "I've attached…" and friends. The cold lane uploads no files (rules §7).
-ATTACH_PROMISE = re.compile(r"\battach(ed|ing|ment)\b|\benclosed?\b|\bsee the (pdf|deck) below\b", re.I)
+# Same phrasings the SmartLead feeder refuses (FIX); apostrophes straight or curly.
+ATTACH_PROMISE = re.compile(r"\b(i['’]?ve|i have|we['’]?ve|we have) (also )?attached\b|\bplease find (it |them )?"
+                            r"(attached|enclosed)\b|\bsee (the )?attached\b|\battached (is|are|please)\b|"
+                            r"\benclosed (is|are|please)\b|\bi['’]?m attaching\b|\bsee the (pdf|deck) below\b", re.I)
+# Looser mentions only earn a CHECK ("attachment" also has other meanings).
+ATTACH_WORD = re.compile(r"\battach(ed|ing|ment)s?\b|\benclosed\b", re.I)
 
-LINK = re.compile(r"https?://|www\.", re.I)
+LINK = re.compile(r"https?://[^\s\"'<>)]+|www\.[^\s\"'<>)]+", re.I)
+# File-share and short-link hosts (rules §8). "View the document on OneDrive" from a stranger is the
+# credential-phishing pattern, so gateways score these hardest; short links hide the destination.
+FILE_SHARE = re.compile(r"(1drv\.ms|onedrive\.|sharepoint\.com|dropbox\.com|drive\.google\.|docs\.google\.|"
+                        r"wetransfer\.|we\.tl|box\.com|bit\.ly|tinyurl\.|t\.co/|ow\.ly|rebrand\.ly|cutt\.ly)", re.I)
 TOKEN = re.compile(r"\{\{\s*([^}]+?)\s*\}\}")
 ALLOWED_TOKENS = {"first_name"}
 
@@ -84,7 +93,9 @@ def page_text(slug, page_id):
             return None
         for b in j.get("results", []):
             rt = (b.get(b.get("type"), {}) or {}).get("rich_text", [])
-            out.append("".join(x.get("plain_text", "") for x in rt))
+            # Keep link targets: plain_text holds only the anchor ("here"), and the URL is what
+            # spam filters and the link rules care about.
+            out.append("".join(x.get("plain_text", "") + (f" <{x['href']}>" if x.get("href") else "") for x in rt))
         if not j.get("has_more"):
             return "\n".join(out).strip()
         cursor = j.get("next_cursor")
@@ -129,7 +140,7 @@ def load_steps(slug, wave_id, names):
     return sorted(steps, key=lambda s: (s["n"] is None, s["n"] or 0))
 
 
-def check_steps(steps):
+def check_steps(steps, check_delays=True):
     """Pure function: list of (level, message). Kept separate from the I/O so it can be tested."""
     f = []
     if not steps:
@@ -172,17 +183,29 @@ def check_steps(steps):
             f.append(("CHECK", f"{tag}: has a file attached ({', '.join(s['files'])}). The cold lane sends "
                                f"no attachments, so the recipient won't get it"))
         if ATTACH_PROMISE.search(body):
-            f.append(("FIX", f"{tag}: the text mentions an attachment. Cold emails carry none; "
+            f.append(("FIX", f"{tag}: the text says something is attached. Cold emails carry none; "
                              f"offer it instead (\"happy to send the one-pager\")"))
-        if LINK.search(body):
-            f.append(("CHECK", f"{tag}: contains a link. Links in cold emails are the most common spam trigger"))
+        elif ATTACH_WORD.search(body):
+            f.append(("CHECK", f"{tag}: mentions an attachment; make sure it doesn't promise one"))
+        links = LINK.findall(body)
+        for url in links:
+            if FILE_SHARE.search(url):
+                f.append(("FIX", f"{tag}: links to a file-sharing or short-link host ({url[:60]}). From a stranger "
+                                 f"that reads as phishing; link a page on the client's own site, or offer it on reply"))
+        if links and i == 1:
+            # Ratified for the first client's scope (June 2026): the deck link "rides a later email
+            # touch, never touch 1". Rules §8.
+            f.append(("FIX", f"{tag}: has a link. The first email carries none: offer the material and send it "
+                             f"on reply, or move the link to step 2 or later"))
+        elif any(not FILE_SHARE.search(u) for u in links):
+            f.append(("CHECK", f"{tag}: contains a link. Fine after step 1 if it points to the client's own website"))
         for tok in TOKEN.findall(body + " " + s["subject"]):
             if tok == "signature":
                 f.append(("CHECK", f"{tag}: {{{{signature}}}} renders as nothing on the cold lane; "
                                    f"the mailbox adds its own signature. Harmless, but remove it"))
             elif tok not in ALLOWED_TOKENS:
                 f.append(("FIX", f"{tag}: {{{{{tok}}}}} isn't a field the sender fills; it renders as nothing"))
-        if i < last and not s["delay"]:
+        if check_delays and i < last and not s["delay"]:
             f.append(("FIX", f"{tag}: wait before the next step is {s['delay']!r}; it must be at least 1 day"))
         if s["status"] and s["status"] != "Active":
             f.append(("CHECK", f"{tag}: status is {s['status']}, so it is not approved yet"))
@@ -205,6 +228,25 @@ def check_senders(accounts, attached):
         if problems:
             f.append((level, f"mailbox {a.get('from_email')} {where}: {'; '.join(problems)}"))
     return f
+
+
+def smartlead_steps(slug, campaign_id):
+    """The sequence as SmartLead holds it. It can differ from Notion: an edit made directly in
+    SmartLead never reaches the templates (seen on the first client, 19 Oct 2026)."""
+    k = fe.key(slug, "smartlead")
+    code, seq = fe.http("GET", f"https://server.smartlead.ai/api/v1/campaigns/{campaign_id}/sequences?api_key={k}",
+                        {"User-Agent": "Mozilla/5.0"})
+    if code != 200 or not isinstance(seq, list):
+        return []
+    out = []
+    for q in sorted(seq, key=lambda x: x.get("seq_number") or 0):
+        html = q.get("email_body") or ""
+        hrefs = " ".join(f"<{h}>" for h in re.findall(r'href="([^"]+)"', html))
+        text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>|&nbsp;", " ", html)).strip()
+        out.append({"id": q.get("id"), "n": q.get("seq_number"), "subject": (q.get("subject") or "").strip(),
+                    "delay": (q.get("seq_delay_details") or {}).get("delay_in_days"), "status": "Active",
+                    "files": [], "body": f"{text} {hrefs}".strip()})
+    return out
 
 
 def smartlead_senders(slug, campaign_id):
@@ -237,6 +279,14 @@ if __name__ == "__main__":
     if fe.has_key(cfg["slug"], "smartlead"):
         accounts, attached = smartlead_senders(cfg["slug"], a.smartlead)
         findings += check_senders(accounts, attached)
+        if a.smartlead:
+            live = smartlead_steps(cfg["slug"], a.smartlead)
+            # SmartLead stores the wait BEFORE a step (step 1 = 0), Notion the wait AFTER it, so the
+            # delay rule only applies to the Notion copy.
+            # Report only what the live copy adds over the Notion copy, so a fix made in one place
+            # but not the other shows up instead of hiding behind a duplicate line.
+            have = {m for _, m in findings}
+            findings += [(lv, "in SmartLead: " + m) for lv, m in check_steps(live, check_delays=False) if m not in have]
     else:
         findings.append(("CHECK", "no SmartLead key configured, so the senders were not checked"))
     subjects = " | ".join(f"{s['n']}: {s['subject'] or '(reply)'}" for s in steps)
