@@ -92,7 +92,7 @@ anything to Approved. Do not send, approve, activate, push, or change any campai
 terminal is unavailable, say so in the report. End with: "Reply here to approve, edit or reject the drafts."
 ```
 
-Skill updates arrive by themselves when automatic updates are switched on (setup §3c). If they aren't, the Monday brief reminds her once to say (`update-skills` handles it) `update the fundraising engine skills`.
+Skill updates arrive by themselves when automatic updates are switched on (setup §3c). If they aren't, the Monday brief reminds her once to say `update the fundraising engine skills` (the `update-skills` skill runs it).
 
 **Follow-ups due, Monday and Thursday at 6:30 operator time**
 ```
