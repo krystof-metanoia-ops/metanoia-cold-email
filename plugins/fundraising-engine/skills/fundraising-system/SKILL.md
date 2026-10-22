@@ -52,6 +52,7 @@ A campaign the operator wants to run **by hand, one email at a time**, must not 
 - **The ChatGPT chat** is where the operator talks to you: the morning brief, reviewing drafts, giving feedback, approving. Notion is the record.
 - **Anything that calls an API with a key** runs in a terminal on her Mac (ChatGPT Work / Codex with Mac access), using the scripts in these skills. That covers SmartLead, MillionVerifier, BounceBan, and Notion bulk writes. Keys are read from the macOS Keychain by the scripts. Never ask her to paste a key into the chat. Never print one.
 - **Clay** runs through its ChatGPT app.
+- **Cloud chat or a chat on her Mac.** Installed from the command line, this plugin exists only in chats that run on her Mac (the ChatGPT desktop app with access to her computer). A cloud chat (the web, the phone, or Work without her computer) doesn't see it at all. If her workspace imported the plugin from GitHub (`setup` §3d), cloud chats see the instructions too, but they still can't run the scripts or read the Keychain. When a task needs the terminal and you have none, say so in one sentence and ask her to open a chat on her Mac. Don't improvise around it.
 
 ## 5. Asking before spending or sending
 

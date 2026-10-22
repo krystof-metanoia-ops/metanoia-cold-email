@@ -61,6 +61,12 @@ About 30 minutes, done together with the Metanoia consultant the first time. You
    - Say `run the health check`. You'll see your SmartLead plan status, your sending mailboxes and whether any sending domain is on a blocklist.
    - Then say `verify <one of your own addresses>`. A macOS "allow access" dialog must appear before anything is spent. If it runs without one, stop and tell the Metanoia consultant.
 
+## Which chats can use it
+
+Installed with the commands above, the plugin lives on your Mac. It's available in chats that run on your computer (the ChatGPT desktop app with access to your Mac), which is also where the SmartLead, verification and other terminal steps work. A cloud chat (chatgpt.com in the browser, the phone app, or Work running in the cloud) can't see it, and will say the plugin is unavailable.
+
+To have it in every chat as well, a workspace owner or admin imports it once in the browser: chatgpt.com → Admin → Plugins → Add → Import marketplace, with this repository's URL. It then updates from GitHub daily (**Sync now** forces it). Cloud chats get the instructions this way, but terminal work still needs a chat on your Mac. Details: `setup` §3d.
+
 ## Updating
 
 Setup offers to switch on **automatic updates**: a small job on your Mac fetches new versions every morning at 07:00 and at login, so you never need to ask. (`setup/scripts/install_autoupdate.sh`; `--remove` turns it off.) You can still update by hand any time: say `update the fundraising engine skills`. If the approval gate changed, ChatGPT asks you to review it again. That's expected. **Start a new chat after an update.** A chat that is already open may keep the skills it started with.

@@ -107,6 +107,16 @@ They run in OpenAI's cloud, not on her Mac, so they can't use the Keychain. The 
 
 Offer: "Shall I switch on automatic updates, so new versions of these skills arrive by themselves every morning?" On her yes, run `bash <full path>/setup/scripts/install_autoupdate.sh` (from your terminal is fine; it needs no input). It installs a small macOS job that runs `codex plugin marketplace upgrade` daily at 07:00 and at login, and logs to `~/.fundraising-engine/update.log`. To turn it off: the same script with `--remove`.
 
+## 3d. In every chat, not only on her Mac (workspace import, optional)
+
+Installed from the command line, the plugin is available only in chats that run on her Mac. To have it in every chat (web, phone, Work in the cloud), a **workspace owner or admin** imports the plugin's GitHub repository once. This happens in the browser, not on the command line and not in the desktop app's plugin screen, which only add it to her Mac again ("already installed"):
+
+1. On chatgpt.com, signed in as the admin: profile menu → **Admin** (or Workspace settings) → **Plugins** → **Add** → **Import marketplace**.
+2. Source: the plugin's repository URL (`https://github.com/krystof-metanoia-ops/metanoia-cold-email`). Leave Path and Branch empty. Authorise GitHub.
+3. Open the imported plugin and set its installation policy (Available or Installed) for her role.
+
+It then syncs from GitHub every day, and **Sync now** on the marketplace page forces an update. Two limits she should know: in a cloud chat the scripts, the Keychain keys and the approval check don't run, so SmartLead, verification and anything else in the terminal still needs a chat on her Mac. Keep the command-line install for that. If the import reports the plugin as already installed, don't work around it: report the exact message to the Metanoia consultant with `report-a-problem`.
+
 ## 4. Check it works (free)
 
 1. `python3 fundraising-system/scripts/check_health.py --client <slug>`. Expect the SmartLead plan status, the mailboxes and the domain blocklist results.
