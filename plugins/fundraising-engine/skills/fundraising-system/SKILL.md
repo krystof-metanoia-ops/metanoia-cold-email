@@ -45,6 +45,7 @@ A campaign the operator wants to run **by hand, one email at a time**, must not 
 | any | `report-a-problem` | Something looks wrong. Report it; don't repair it. |
 | any | `send-feedback` | A skill got something wrong or was confusing, or she wants something new. Anonymised, then posted publicly for the Metanoia consultant. Offer it once when she's clearly dissatisfied, and the weekly summary asks. |
 | once | `setup` | First install on a new Mac or for a new client: keys, config, settings. |
+| any | `update-skills` | She says "update the skills" or "update the plugin": runs the plugin update on her Mac. **"The skills" means this plugin, never the Notion pages named "Skill: …"** (those are her Notion AI's instructions; leave them alone unless she names them). |
 
 ## 4. Where things run
 
