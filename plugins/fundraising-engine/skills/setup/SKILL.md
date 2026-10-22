@@ -117,6 +117,8 @@ Installed from the command line, the plugin is available only in chats that run 
 
 It then syncs from GitHub every day, and **Sync now** on the marketplace page forces an update. Two limits she should know: in a cloud chat the scripts, the Keychain keys and the approval check don't run, so SmartLead, verification and anything else in the terminal still needs a chat on her Mac. Keep the command-line install for that. If the import reports the plugin as already installed, don't work around it: report the exact message to the Metanoia consultant with `report-a-problem`.
 
+**If there's no Import marketplace.** OpenAI documents the GitHub import under its Enterprise admin pages. On the first client's Business workspace (Oct 2026) the owner's Admin → Plugins showed only **Apps** and **Skills**, with no import. Then skip this section: don't upload the skills one by one as workspace skills. That makes a second copy that never updates and drifts from this one. Use chats on her Mac, which is where the terminal work happens anyway.
+
 ## 4. Check it works (free)
 
 1. `python3 fundraising-system/scripts/check_health.py --client <slug>`. Expect the SmartLead plan status, the mailboxes and the domain blocklist results.

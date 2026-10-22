@@ -65,7 +65,7 @@ About 30 minutes, done together with the Metanoia consultant the first time. You
 
 Installed with the commands above, the plugin lives on your Mac. It's available in chats that run on your computer (the ChatGPT desktop app with access to your Mac), which is also where the SmartLead, verification and other terminal steps work. A cloud chat (chatgpt.com in the browser, the phone app, or Work running in the cloud) can't see it, and will say the plugin is unavailable.
 
-To have it in every chat as well, a workspace owner or admin imports it once in the browser: chatgpt.com → Admin → Plugins → Add → Import marketplace, with this repository's URL. It then updates from GitHub daily (**Sync now** forces it). Cloud chats get the instructions this way, but terminal work still needs a chat on your Mac. Details: `setup` §3d.
+To have it in every chat as well, a workspace owner or admin imports it once in the browser: chatgpt.com → Admin → Plugins → Add → Import marketplace, with this repository's URL. It then updates from GitHub daily (**Sync now** forces it). Cloud chats get the instructions this way, but terminal work still needs a chat on your Mac. Details: `setup` §3d. Not every plan has this import: if Admin → Plugins shows only Apps and Skills, skip it and work in chats on your Mac.
 
 ## Updating
 
