@@ -117,7 +117,7 @@ Installed from the command line, the plugin is available only in chats that run 
 
 It then syncs from GitHub every day, and **Sync now** on the marketplace page forces an update. Two limits she should know: in a cloud chat the scripts, the Keychain keys and the approval check don't run, so SmartLead, verification and anything else in the terminal still needs a chat on her Mac. Keep the command-line install for that. If the import reports the plugin as already installed, don't work around it: report the exact message to the Metanoia consultant with `report-a-problem`.
 
-**If there's no Import marketplace.** OpenAI documents the GitHub import under its Enterprise admin pages. On the first client's Business workspace (Oct 2026) the owner's Admin → Plugins showed only **Apps** and **Skills**, with no import. Then skip this section: don't upload the skills one by one as workspace skills. That makes a second copy that never updates and drifts from this one. Use chats on her Mac, which is where the terminal work happens anyway.
+**If you can't find it.** The Admin option appears only for the account that owns or administers the workspace, which may be a different email from the one she uses day to day; signing in with that account fixes it. Plugins → Add → Import marketplace worked on the first client's Business workspace (22 Oct 2026), even though a first look showed only the Apps and Skills tabs. Don't upload the skills one by one as workspace skills instead: that makes a second copy that never updates and drifts from this one.
 
 ## 4. Check it works (free)
 
