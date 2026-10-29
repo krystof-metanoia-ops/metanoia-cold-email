@@ -15,7 +15,7 @@ You help the operator run investor outreach for one client at a time. The client
 1. **Know which client you're working for.** Configs live in `~/.fundraising-engine/<client>.json`. If there's more than one and the operator hasn't said, ask.
 2. **Read the client's context page in Notion.** Its title is in the config under `context_page` (often "Context: The Emailing Engine"). It describes the machinery as it is today and wins over this skill, your memory and older chats. If it contradicts what the machinery actually does, say so.
 3. **Read the campaign's own page before working on a campaign.** Its body holds the audience, the angle, the deck version and what not to say.
-4. **Read the last two entries of the session log** (section 7b) when this chat will do real work. They say what the previous chats did, what she decided and what is still open. Don't make her repeat it.
+4. **Read the last two rows of the session log** (section 7b, newest first) when this chat will do real work. They say what the previous chats did, what she decided and what is still open. Don't make her repeat it.
 
 ## 2. Notion fields are commands
 
@@ -97,15 +97,15 @@ Her words, not your interpretation.
 
 Each working chat leaves a short record in Notion, so the next chat (and the Metanoia consultant) can see what happened without asking her. Her chats are separate and many run at once; without a log, the next one starts blind.
 
-**Where.** A page titled **Agent session logs** in the client's workspace, next to the Drafting feedback page (or wherever the context page says). Each chat writes **one child page** under it, titled `YYYY-MM-DD · <what the chat is about>` (for example, `2026-10-29 · Florida wave follow-ups`). If the parent page doesn't exist, create it beside the Drafting feedback page and tell her in one line. It's a plain page, not a database, so nothing in the schema changes.
+**Where.** The **Agent session logs** database in the client's workspace (its data source is `notion.session_logs_ds` in the config; otherwise find it by title). Each chat writes **one row**, titled `YYYY-MM-DD · <what the chat is about>` (for example, `2026-10-29 · Florida wave follow-ups`). Fill the properties: Date, Status (`In progress` while the chat works, `Done` at the end), Chat (`Mac`, `Cloud` or `Scheduled`), Plugin version, Skills, Approvals, Still open, and tick Problem if anything failed. The step-by-step log goes in the row's page body. If the database doesn't exist, don't create one (that's the Metanoia consultant's build work): tell her in one line and carry on without a log.
 
 **When.**
 - **Start the entry on the first real action:** the first Notion write, the first script that spends or sends, or the first draft she reviews. A chat that only answers a question or reads a report writes nothing.
 - **Add to it as you go**, right after each step that changes something. Don't save it all for the end; a chat can stop at any moment.
-- **Finish it** when she says she's done, when the task is complete, or before you tell her to open a new chat. Fill in "Still open".
+- **Finish it** when she says she's done, when the task is complete, or before you tell her to open a new chat. Fill in "Still open" and set Status = Done.
 - **Scheduled tasks** (morning brief, follow-ups, weekly summary) write an entry only when they drafted something. A plain report writes nothing.
 
-**What it holds.** Short lines, plain words, links to the Notion rows and pages it touched:
+**What it holds.** Short lines, plain words, links to the Notion rows and pages it touched. If a line carries a time, take it from `date` at that moment; never guess one. In a cloud chat with no terminal, leave times out:
 - **Chat:** where it ran (her Mac or a cloud chat) and the plugin version from `plugin.json`.
 - **Done:** each step that changed something, with numbers (for example, "verified 42 addresses: 35 Valid, 7 Invalid", "drafted 6 replies, 4 approved").
 - **Approvals:** each "approve spend", "approve send" or "approve post": what it covered, how many records or emails, the credits used.
