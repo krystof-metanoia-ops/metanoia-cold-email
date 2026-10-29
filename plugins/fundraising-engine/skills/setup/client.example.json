@@ -12,6 +12,7 @@
     "contacts_ds": "<Contacts data source id>",
     "interactions_ds": "<Interactions data source id>",
     "campaigns_ds": "<Outreach Campaigns data source id>",
-    "templates_ds": "<Templates data source id>"
+    "templates_ds": "<Templates data source id>",
+    "session_logs_ds": "<Agent session logs data source id>"
   }
 }
