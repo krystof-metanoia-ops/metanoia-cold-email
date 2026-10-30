@@ -1,6 +1,7 @@
 {
   "client": "<Client name, e.g. Acme Capital>",
   "context_page": "<Title of the client's Notion context page, e.g. Context: The Emailing Engine>",
+  "memory_page": "<Title of the client's Agent memory page, e.g. Agent memory>",
   "primary_domain": "<domain of the operator's real mailbox, e.g. acme.com>",
   "cold_domains": [
     "<cold sending domain 1>",
