@@ -1,5 +1,5 @@
 {
-  "description": "Approval gate: spending credits or sending email needs 'approve spend' / 'approve send' in the operator's latest message.",
+  "description": "Approval gate: spending credits, sending email or publishing the website needs 'approve spend' / 'approve send' / 'approve publish' in the operator's latest message.",
   "hooks": {
     "UserPromptSubmit": [
       { "hooks": [ { "type": "command", "command": "python3 \"${PLUGIN_ROOT}/hooks/approval_gate.py\"", "timeout": 5 } ] }
