@@ -51,9 +51,17 @@ SEND = [
 POST = [re.compile(r"gh\s+issue\s+(create|comment|edit)\b"),
         re.compile(r"gh\s+api\b.*-X\s*(POST|PATCH|PUT|DELETE)", re.I),
         re.compile(r"gh\s+api\b.*/(issues|comments|reactions)\b.*-(f|F)\s")]
+# Publishing the client's website (29-30 Oct 2026, website skill): a merge into main is a production
+# deploy (15 Netlify credits on the free plan, and it changes the live site), so it needs
+# "approve publish". Branches, pull requests and deploy previews are free and pass.
+PUBLISH = [re.compile(r"gh\s+pr\s+merge\b"),
+           re.compile(r"git\s+push\b[^\n]*\s(origin\s+)?(HEAD:)?(main|master)\b"),
+           re.compile(r"gh\s+api\b.*/pulls/\d+/merge\b")]
 # Never from the operator's machine, approval or not: deploying, deleting or re-configuring the
 # workers is the Metanoia consultant's build work (a wrong deploy silently stops sending for everyone).
-NEVER = [re.compile(r"ntn\s+workers\s+(deploy|delete|env|create|new|rename)\b")]
+NEVER = [re.compile(r"ntn\s+workers\s+(deploy|delete|env|create|new|rename)\b"),
+         # Production deploys outside the pull-request flow (website skill §5): never from here.
+         re.compile(r"netlify\s+deploy\b.*(--prod\b|\s-p\b)")]
 
 
 def load():
@@ -74,7 +82,7 @@ def main():
 
     if name == "UserPromptSubmit":
         p = (ev.get("prompt") or "").lower()
-        kinds = [k for k in ("spend", "send", "post") if f"approve {k}" in p]
+        kinds = [k for k in ("spend", "send", "post", "publish") if f"approve {k}" in p]
         save({"turn_id": ev.get("turn_id"), "kinds": kinds, "at": time.time()})
         return  # exit 0, no output: the prompt goes through unchanged
 
@@ -82,13 +90,18 @@ def main():
         return
     cmd = (ev.get("tool_input") or {}).get("command") or ""
     if any(r.search(cmd) for r in NEVER):
+        why = ("A production deploy outside the pull-request flow is never run from here: publish by "
+               "merging the pull request after 'approve publish' (website skill §3)."
+               if "netlify" in cmd else
+               "Changing the workers (deploy, delete, env, create) is "
+               "build work for the Metanoia consultant, never done from here. Use report-a-problem instead.")
         print(json.dumps({"hookSpecificOutput": {"hookEventName": "PreToolUse",
-              "permissionDecision": "deny",
-              "permissionDecisionReason": "Changing the workers (deploy, delete, env, create) is "
-              "build work for the Metanoia consultant, never done from here. Use report-a-problem instead."}}))
+              "permissionDecision": "deny", "permissionDecisionReason": why}}))
         return
     need = None
-    if any(r.search(cmd) for r in POST):
+    if any(r.search(cmd) for r in PUBLISH):
+        need = "publish"
+    elif any(r.search(cmd) for r in POST):
         need = "post"
     elif any(r.search(cmd) for r in SEND):
         need = "send"
@@ -102,7 +115,8 @@ def main():
     if ok:
         return
     what = {"spend": "spends credits", "send": "sends email or arms a campaign",
-            "post": "publishes to the public feedback repository"}[need]
+            "post": "publishes to the public feedback repository",
+            "publish": "publishes the website (a production deploy, 15 Netlify credits)"}[need]
     print(json.dumps({"hookSpecificOutput": {
         "hookEventName": "PreToolUse",
         "permissionDecision": "deny",
