@@ -50,6 +50,23 @@ If the block is missing, ask the operator for the three values once and add them
    - On a free plan, Netlify builds a **private** repository only from commits made by the repository owner's account. A commit pushed by anyone else fails. Then the fix is either making the repository public (it holds only the public website) or committing from the owner's account. Ask the operator; don't change repository settings yourself.
 6. **Show her.** Send the preview link and a plain list of what changed (old wording → new wording for text). Further edits go on the **same branch**, and the same preview link updates. Keep iterating there.
 
+## 2a. Showing it to someone else: a link they can open
+
+A local address (`127.0.0.1`, `localhost`, `file://`) works only on her Mac. A local preview is fine for her own quick look, but **anything that another person must see goes on a hosted preview**, and you never send anyone a local address. A design she has chosen is not delivered until the consultant can open it.
+
+**Prototype of a design the template can't do yet** (a look that needs new CSS; §5 still applies, so you don't edit the template):
+1. Branch from the branch the current preview uses: `git switch -c proto/<short-name>`.
+2. Build the prototype with relative paths, and copy the whole generated folder to `static/proto-<short-name>/`. Netlify serves `static/` as it is, at the same path. Add the CSS and your implementation notes in `static/proto-<short-name>/notes/`, so the consultant can adopt the design from them.
+3. Push, and open a **draft** pull request: `gh pr create --draft --base main --title "Prototype: <name>, do not merge" --body "<what it shows>"`. It's free and is never merged.
+4. The link is `https://deploy-preview-<n>--<netlify_site>.netlify.app/proto-<short-name>/`. Further rounds go on the same branch.
+
+**Before you send any link, test it without a login:** `curl -s -o /dev/null -w '%{http_code}' <link>`.
+- `200`: anyone with the link can open it.
+- `401`: previews are private. On Netlify's Free and Personal plans only the team owner can see private previews, and inviting someone needs the Pro plan, so an invitation is not the fix. Ask her whether previews may be public. If yes, walk her through it: Netlify → the project → **Project configuration → General → Visitor access → Project visibility**, set **previews** to public, leave production as it is, save. It's free. Previews stay out of search engines only if `static/_headers` sets noindex, so check that first. Anyone with the address can then open every preview, so unconfirmed facts must stay placeholders. (Checked against Netlify's docs, 4 Nov 2026.)
+- Then test again, and send the link only after it returns `200`. Say plainly if it doesn't.
+
+**A design she has chosen goes to the consultant at once,** with the link and what she chose (`send-feedback` or `report-a-problem`). Writing "awaiting the consultant" in the session log doesn't tell him.
+
 ## 3. Publishing: only on "approve publish"
 
 1. **Batch.** Publish once a set of changes is ready, not after every tweak. Each publish is 15 credits.
@@ -76,7 +93,7 @@ If the block is missing, ask the operator for the three values once and add them
   - build settings, domains, form notifications;
   - anything in the Netlify dashboard.
 
-  Walk her through clicks if she asks, but you don't change them from the terminal.
+  Walk her through clicks if she asks (§2a has the one she needs for sharing), but you don't change them from the terminal.
 - **Production deploys outside the pull-request flow:** `netlify deploy --prod`, manual deploys, re-running production builds. The approval gate blocks `netlify deploy --prod` outright.
 
 ## 6. Domain switch (once, with the Metanoia consultant)
@@ -93,5 +110,6 @@ Pointing the real domain at Netlify is a one-time job done together with the Met
 - Push to `main`, merge, or publish without "approve publish" in her latest message.
 - Run `netlify deploy --prod`, or trigger builds in a loop.
 - Invent facts or numbers, or remove a placeholder without the fact.
+- Send anyone a local address, or a link you haven't tested without a login.
 - Touch email-related DNS records.
 - Edit the site template or Netlify settings.
