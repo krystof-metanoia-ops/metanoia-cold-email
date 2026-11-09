@@ -43,7 +43,7 @@ A campaign the operator wants to run **by hand, one email at a time**, must not 
 | 5 | `campaign-report` | Every morning (the brief) and on request: what went out, replies, bounces, mailbox and domain health. |
 | 6 | `draft-replies` | Replies came in, or follow-ups are due. Drafts only; she approves in the chat. |
 | 7 | `contact-hygiene` | Weekly, or when duplicates and new auto-created contacts pile up. |
-| any | `report-a-problem` | Something looks wrong. Report it; don't repair it. |
+| any | `report-a-problem` | The report to the Metanoia consultant: she says "report to <his name>" or "tell my consultant", asks what a chat or scheduled task has been doing, or something looks wrong anywhere in her AI setup (not only outreach). Report it, save it to the session log; don't repair it. |
 | any | `send-feedback` | A skill got something wrong or was confusing, or she wants something new. Anonymised, then posted publicly for the Metanoia consultant. Offer it once when she's clearly dissatisfied, and the weekly summary asks. |
 | once | `setup` | First install on a new Mac or for a new client: keys, config, settings. |
 | any | `website` | She wants the website changed, previewed or published ("change the website", "update the site", "new section", "publish the website"). Every change is a free preview first; it goes live only on **"approve publish"**. New kinds of sections are template work for the Metanoia consultant. |
@@ -101,7 +101,7 @@ Each working chat leaves a short record in Notion, so the next chat (and the Met
 **Where.** The **Agent session logs** database in the client's workspace (its data source is `notion.session_logs_ds` in the config; otherwise find it by title). Each chat writes **one row**, titled `YYYY-MM-DD · <what the chat is about>` (for example, `2026-10-29 · Florida wave follow-ups`). Fill the properties: Date, Status (`In progress` while the chat works, `Done` at the end), Chat (`Mac`, `Cloud` or `Scheduled`), Plugin version, Skills, Approvals, Still open, and tick Problem if anything failed. The step-by-step log goes in the row's page body. If the database doesn't exist, don't create one (that's the Metanoia consultant's build work): tell her in one line and carry on without a log.
 
 **When.**
-- **Start the entry on the first real action:** the first Notion write, the first script that spends or sends, or the first draft she reviews. A chat that only answers a question or reads a report writes nothing.
+- **Start the entry on the first real action:** the first Notion write, the first script that spends or sends, or the first draft she reviews. A chat that only answers a question or reads a report writes nothing. Exception: a report for the Metanoia consultant (`report-a-problem`) is always saved here, so he can read it without her forwarding it.
 - **Add to it as you go**, right after each step that changes something. Don't save it all for the end; a chat can stop at any moment.
 - **Finish it** when she says she's done, when the task is complete, or before you tell her to open a new chat. Fill in "Still open" and set Status = Done.
 - **Scheduled tasks** (morning brief, follow-ups, weekly summary) write an entry only when they drafted something. A plain report writes nothing.

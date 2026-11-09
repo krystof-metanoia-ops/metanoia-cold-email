@@ -50,8 +50,21 @@ def key(client_slug, tool):
     service = f"fundraising-engine.{client_slug}.{tool}"
     r = subprocess.run(["security", "find-generic-password", "-s", service, "-w"],
                        capture_output=True, text=True)
-    if r.returncode != 0 or not r.stdout.strip():
+    # Only exit code 44 (errSecItemNotFound) means the key is really missing. Every other
+    # failure means the Keychain could not be READ from here: the agent's restricted terminal
+    # has no Keychain access (seen 15 Oct 2026; it works after a retry "with Mac access"), or
+    # the operator denied or missed the Keychain prompt that setup deliberately puts on every
+    # read (`-T ""`). Until v0.9.2 all of these said "No Keychain item ... run setup", so on
+    # 9 Nov 2026 an agent asked the operator to redo setup for a Notion key that had been in
+    # her Keychain since 16 Oct (the Metanoia consultant's call: tell the two cases apart).
+    if r.returncode == 44:
         sys.exit(f"No Keychain item '{service}'. Run the `setup` skill to add the {tool} key.")
+    if r.returncode != 0 or not r.stdout.strip():
+        sys.exit(f"The Keychain item '{service}' could not be read from here "
+                 f"(security exit code {r.returncode}). The key is probably there: do NOT run "
+                 f"setup again. Retry the command with access to her Mac (outside the restricted "
+                 f"terminal), and ask her to click Allow on the Keychain prompt. "
+                 f"`setup/scripts/check_setup.py` shows whether the item exists.")
     return r.stdout.strip()
 
 
