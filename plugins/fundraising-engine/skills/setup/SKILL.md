@@ -96,7 +96,7 @@ Feedback goes to the plugin's public GitHub issues (`send-feedback`).
 
 A plugin can't install scheduled tasks, but you can create them from this chat. Don't leave it to her.
 
-1. First check her existing scheduled tasks. List any that send, approve or push, and offer to delete them. She confirms each one.
+1. First check her existing scheduled tasks. List any that send, approve or push, and any that write to Notion or "sync" Gmail with Notion (`fundraising-system` §3b and §8 say why neither is needed), and offer to delete them. She confirms each one.
 2. Then offer: "Shall I create the three scheduled tasks now? A morning brief every day at 6:00, follow-ups due Monday and Thursday at 6:30, a weekly summary Friday at 16:00, in your time zone." Ask her time zone if you don't know it.
 3. On her yes, create each task with its text from `campaign-report` §4 (replace `<client>` and the time zone). Then show her the list of tasks you created.
 4. Each task may read, report and create Drafted replies only. Never approve, send, push or change a campaign.

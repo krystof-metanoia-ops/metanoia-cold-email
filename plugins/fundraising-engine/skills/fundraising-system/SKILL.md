@@ -1,6 +1,6 @@
 ---
 name: fundraising-system
-description: Read first for ANY fundraising-outreach work — investors, contacts, campaigns, waves, templates, drafts, replies, SmartLead, Clay, email verification, the morning brief. Explains how the Notion-based outreach machinery works, which Notion writes are commands that send email, the order the other skills run in, and the rules every skill follows (ask before spending or sending, who may be emailed). Not for writing the email copy itself.
+description: Read first for ANY fundraising-outreach work — investors, contacts, campaigns, waves, templates, drafts, replies, SmartLead, Clay, email verification, the morning brief, follow-ups, reminders, scheduled tasks and automations. Explains how the Notion-based outreach machinery works, which Notion writes are commands that send email, the order the other skills run in, and the rules every skill follows (ask before spending or sending, who may be emailed). Not for writing the email copy itself.
 ---
 
 # The fundraising system — how it works and how the skills fit together
@@ -48,6 +48,27 @@ A campaign the operator wants to run **by hand, one email at a time**, must not 
 | once | `setup` | First install on a new Mac or for a new client: keys, config, settings. |
 | any | `website` | She wants the website changed, previewed or published ("change the website", "update the site", "new section", "publish the website"). Every change is a free preview first; it goes live only on **"approve publish"**. New kinds of sections are template work for the Metanoia consultant. |
 | any | `update-skills` | She says "update the skills" or "update the plugin": runs the plugin update on her Mac. **"The skills" means this plugin, never the Notion pages named "Skill: …"** (those are her Notion AI's instructions; leave them alone unless she names them). |
+
+## 3b. Follow-ups: the system already does them
+
+<!-- Added in v0.9.3 (12 Nov 2026, Metanoia consultant's go). On 22 Oct a chat built its own hourly
+"follow-up sync" as a ChatGPT scheduled task that made one Notion task per recipient; Notion refused
+its writes and it paused itself, leaving 14 overdue tasks. A later task sent follow-ups on its own every
+Tuesday. Neither was needed: the machinery below already owns every follow-up. This section says where
+follow-ups live so a chat uses it instead of building a second system. -->
+
+Every follow-up already has an owner. Use it; never build another one.
+
+| Who is followed up | Who does it | Where the date lives |
+|---|---|---|
+| Cold prospect, no reply | Their SmartLead sequence, which stops on reply by itself | SmartLead |
+| Contact in a wave with Active steps | The wave; she presses "Draft Due Emails" | The wave and its templates |
+| Someone who replied, someone she writes to by hand, someone who said "later" | `draft-replies` drafts it; she approves | `Next Touch` on the contact |
+
+- **"Remind me" or "follow up with X in two weeks"** means: set `Next Touch` on that contact (with her yes). The follow-ups-due task (`campaign-report` §4) lists it when the date comes and drafts the email. No new task row, page or scheduled task.
+- **"Set up automatic follow-ups"** means: check that the follow-ups-due scheduled task exists (`setup` §3b) and explain the table above in plain words. Do not build a sync, a tracker page or a task per recipient.
+- **Sent mail logs itself** in Notion within about 15 minutes. Nothing needs to copy Gmail into Notion.
+- If something in the table seems not to work (a date came and nothing was listed, a sequence did not stop), that is a problem with the machinery: use `report-a-problem`. Don't build a workaround.
 
 ## 4. Where things run
 
@@ -121,7 +142,8 @@ Each working chat leaves a short record in Notion, so the next chat (and the Met
 - Send email yourself from Gmail or anything else. You draft; she approves.
 - Log an email that was already sent. Sent mail logs itself within 15 minutes; if it doesn't appear, report it.
 - Set a template Active, a wave to Sending, press Push to SmartLead or Draft Due Emails. Tell her what pressing it will do.
-- Create a scheduled task that sends or approves. Scheduled tasks may read, report and **draft**.
+- Create a scheduled task that sends or approves. Scheduled tasks may read, report and **draft**. This holds also when she asks for one: say in one sentence that a scheduled send can't check a reply that arrived an hour earlier, and offer a task that drafts the same emails for her to approve.
+- Build your own automation: a scheduled task that writes to Notion (other than its own session-log row), a "sync" between Gmail and Notion, a tracker or command-center page, or one task per recipient. Section 3b says who already does that work. If she asks for something the machinery can't do, use `report-a-problem` or `send-feedback`; building it is the Metanoia consultant's work.
 - Change the Notion schema, formulas or worker settings. That's the Metanoia consultant's build work.
 - **Run any `ntn workers` command other than these three:** `ntn workers list`, `ntn workers exec previewDrafts …` and `ntn workers exec previewFeed …` (through `fundraising-system/scripts/workers.py`). The operator may have Full access to the workers, but you never deploy, delete, rename, create, change env/secrets, pull env, or exec anything else (pushToSmartLead, draftNow, appendLeads, syncSequence, pauseCampaign). One wrong command can silently stop all sending. If something there looks needed, use `report-a-problem`.
 - Delete in bulk. List the rows; she confirms each one.
